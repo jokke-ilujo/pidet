@@ -3,10 +3,25 @@
 Python client for passing perf data to InfluxDB.
 
 ## Installation
-`pip install -r requirements.txt && pip install .`
+`pip install pidet`
 
 ## Usage
-`pidet --bucket <your data bucket> --org <your org> --token <your token> --url <url to InfluxDB> [--file <data json file>] or < <data json file>` you can also pipe the output directly to pidet.
+`pidet --bucket <your data bucket> --org <your org> --token <your token> --url <url to InfluxDB> [--file <data json file>] or < <data json file>`
+
+You can also pipe the output directly to pidet:
+`fio --output-format=json /path/to/jobfile | pidet -c /path/to/pidet.ini`
+
+Using ini-style config file, by default pidet is looking from ~/.config/pidet.ini. Different config file location can be supplied with '-c' or '--config' <FILE> argument. The command line arguments override values in the config file.
+
+```ini
+[default]
+influxdb_bucket = fio
+influxdb_org = myorg
+influxdb_url = http://influx.example.com:8086
+influxdb_token = YOUR_TOKEN
+```
+
+So `pidet --bucket another -c ./pidet.ini` with above example would result data stored in the "another" bucket under myorg with YOUR_TOKEN.
 
 ## Supported perf tools
 fio
@@ -15,7 +30,7 @@ fio
 Expand supported tools from fio.
 
 ## License
-Apache 2.0
+Apache Software License 2.0
 
 ## Project status
-Proof Of Concept
+Beta
