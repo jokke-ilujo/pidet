@@ -1,0 +1,3 @@
+oslo-utils
+influxdb-client
+pbr>=2.0.0
