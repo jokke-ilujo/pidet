@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import copy
+import pprint
+
+import pidet
 
 
 class DataParser(object):
@@ -21,6 +24,8 @@ class DataParser(object):
         self.throughput = throughput
         self.latency = latency
         self.hostname = hostname
+        if pidet.DEBUG:
+            self.pp = pprint.PrettyPrinter(width=60, underscore_numbers=True)
 
     def _create_dict(self, jobnum, data):
         p = {}
@@ -57,6 +62,9 @@ class DataParser(object):
             p['fields']['read_kbytes'] = data['job']['read']['io_kbytes']
             p['fields']['write_kbytes'] = data['job']['write']['io_kbytes']
 
+        if pidet.DEBUG:
+            print("fio/parser:DataParser - _create_dict - output")
+            self.pp.pprint(p)
         return p
 
     def parse_perf_obj(self, data):

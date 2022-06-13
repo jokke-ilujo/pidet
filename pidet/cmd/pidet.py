@@ -102,7 +102,10 @@ class PidetShell(object):
             parser.set_defaults(**config['default'])
             (options, args) = parser.parse_known_args(argv)
             if options.debug:
+                pidet.DEBUG = True
                 print(options)
+            if options.verbose:
+                pidet.VERBOSE = True
 
         perfdata = self.get_perfdata(options)
         if not perfdata:
@@ -113,13 +116,15 @@ class PidetShell(object):
         except Exception as e:
             fail(e)
 
-        if options.debug or options.verbose:
+        if pidet.DEBUG:
             print(perf_obj)
 
         dp = DataParser(options.host_name)
         points = dp.parse_perf_obj(perf_obj)
         if not (points and points[0]):
             fail("We have no data.")
+        if pidet.DEBUG or pidet.VERBOSE:
+            print("Writing %i records." % len(points))
         writer = Writer(options)
         writer.write_point_list(points)
 

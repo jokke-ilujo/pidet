@@ -14,6 +14,9 @@
 # limitations under the License.
 import pbr.version
 
+DEBUG = False
+VERBOSE = False
+
 version_info = pbr.version.VersionInfo('pidet')
 
 try:
