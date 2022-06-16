@@ -38,7 +38,8 @@ class DataParser(object):
         p['tags']['blksize'] = data['start']['test_start']['blksize']
         p['tags']['blocks'] = data['start']['test_start']['blocks']
         p['tags']['bytes'] = data['start']['test_start']['bytes']
-        p['tags']['role'] = data['end']['sum_sent']['sender']
+        p['tags']['role'] = ('sender' if data['end']['sum_sent']['sender']
+                             else 'receiver')
         p['tags']['sender_tcp_congestion'] = data['end'][
                 'sender_tcp_congestion']
         p['tags']['receiver_tcp_congestion'] = data['end'][
