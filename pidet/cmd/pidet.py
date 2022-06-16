@@ -29,8 +29,9 @@ import sys
 from oslo_utils import encodeutils
 
 import pidet
-from pidet.fio.parser import DataParser
+from pidet.fio.parser import DataParser as FioParser
 from pidet.influxdb.writer import Writer
+from pidet.iperf3.parser import DataParser as IperfParser
 
 
 class PidetShell(object):
@@ -119,7 +120,12 @@ class PidetShell(object):
         if pidet.DEBUG:
             print(perf_obj)
 
-        dp = DataParser(options.host_name)
+        if perf_obj.get('start', {}).get('version', '').startswith('iperf'):
+            dp = IperfParser(options.host_name)
+        elif perf_obj.get('fio version', None):
+            dp = FioParser(options.host_name)
+        else:
+            fail("Input data not recognized.")
         points = dp.parse_perf_obj(perf_obj)
         if not (points and points[0]):
             fail("We have no data.")

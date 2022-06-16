@@ -23,8 +23,11 @@ influxdb_token = YOUR_TOKEN
 
 So `pidet --bucket another -c ./pidet.ini` with above example would result data stored in the "another" bucket under myorg with YOUR_TOKEN.
 
+pidet will autodetect iperf3 output. `iperf3 -J -c <Server IP> | pidet` when ~/.config/pidet.ini is setup correctly.
+
 ## Supported perf tools
 fio
+iperf3
 
 ## Roadmap
 Expand supported tools from fio.
