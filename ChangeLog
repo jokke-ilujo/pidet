@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* PrettyPrint objects on DEBUG
 * fix iperf3 parser role tag assignment
 * Fix iperf3 parser
 * Add iperf3 support

@@ -24,6 +24,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import pprint
 import sys
 
 from oslo_utils import encodeutils
@@ -104,7 +105,9 @@ class PidetShell(object):
             (options, args) = parser.parse_known_args(argv)
             if options.debug:
                 pidet.DEBUG = True
-                print(options)
+                self.pp = pprint.PrettyPrinter(width=60,
+                                               underscore_numbers=True)
+                self.pp.pprint(options)
             if options.verbose:
                 pidet.VERBOSE = True
 
@@ -118,7 +121,7 @@ class PidetShell(object):
             fail(e)
 
         if pidet.DEBUG:
-            print(perf_obj)
+            self.pp.pprint(perf_obj)
 
         if perf_obj.get('start', {}).get('version', '').startswith('iperf'):
             dp = IperfParser(options.host_name)
