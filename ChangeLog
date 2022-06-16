@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Fix iperf3 parser
 * Add iperf3 support
 * fix tox.ini flake8 excludes
 * Update the README file

@@ -29,7 +29,7 @@ class DataParser(object):
     def _create_dict(self, data, socket_num=None):
         p = {}
         p['measurement'] = str(data['start']['connecting_to']['host'] + '-' +
-                               data['start']['connecting_to']['port'])
+                               str(data['start']['connecting_to']['port']))
         p['tags'] = {}
         p['tags']['hostname'] = self.hostname
         p['tags']['num_streams'] = data['start']['test_start']['num_streams']
@@ -93,5 +93,5 @@ class DataParser(object):
                 soc = blop['end']['stream']['socket']
                 data_points.append(self._create_dict(blop, socket_num=soc))
         else:
-            data_points.append(self._create_dict(blop))
+            data_points.append(self._create_dict(data))
         return data_points
