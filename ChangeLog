@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+0.2.0
+-----
+
+* Release 0.2.0
+* Create python-publish.yml
 * Minor build changes
 * PrettyPrint objects on DEBUG
 * fix iperf3 parser role tag assignment
